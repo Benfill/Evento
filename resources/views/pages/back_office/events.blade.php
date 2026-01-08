@@ -123,71 +123,72 @@
                                     @endforeach
                                     <div id="updateForm"
                                          class="hidden p-6">
-                                        <form action="/event/updates/now" method="post"
-                                              class="w-full px-20 py-12"
-                                              enctype="multipart/form-data">
-                                            @csrf
-                                            <input type="hidden" id="eventId" name="eventId" value="">
-                                            <div class="grid gap-4 mb-4 grid-cols-1">
-                                                <div class="sm:col-span-1">
-                                                    <label for="title"
-                                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                                                    <input type="text" name="title" id="title"
-                                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                           placeholder="Enter Title"
-                                                           value="{{$event['title']}}"
-                                                           required>
-                                                </div>
+                                    <form action="/event/updates/now" method="post"
+                                        class="w-full px-20 py-12"
+                                        enctype="multipart/form-data">
 
-                                                <div class="sm:col-span-1">
-                                                    <label for="description"
-                                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                                                    <input type="text" name="description" id="description"
-                                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                           placeholder="Enter Description"
-                                                           value="{{$event['description']}}"
-                                                           required>
-                                                </div>
+                                        @csrf
 
-                                                <div class="sm:col-span-1">
-                                                    <label for="places"
-                                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Places</label>
-                                                    <input type="number" placeholder="Enter Places"
-                                                           name="places"
-                                                           value="{{$event['places']}}" id="places"
-                                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                </div>
+                                        <input type="hidden" id="eventId" name="eventId"
+                                            value="{{ old('eventId', $event->id ?? '') }}">
 
-                                                <div class="sm:col-span-1">
-                                                    <label for="price"
-                                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                                                    <input type="number" placeholder="Enter Price"
-                                                           name="price"
-                                                           value="{{$event['price']}}" id="price"
-                                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                </div>
+                                        <div class="grid gap-4 mb-4 grid-cols-1">
 
-                                                <div class="sm:col-span-1">
-                                                    <label for="date"
-                                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                                                    <input type="datetime-local" name="date" id="date"
-                                                           value="{{$event['date']}}"
-                                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                </div>
+                                            {{-- Title --}}
+                                            <div>
+                                                <label class="block mb-2 text-sm font-medium">Title</label>
+                                                <input type="text" name="title" id="title"
+                                                    value="{{ old('title', $event->title ?? '') }}"
+                                                    class="input"
+                                                    required>
                                             </div>
 
-                                            <div class="flex justify-between">
-                                                <button type="submit"
-                                                        class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                    Update
-                                                </button>
-                                                <button type="button"
-                                                        id="cancelBtn"
-                                                        class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                    Cancel
-                                                </button>
+                                            {{-- Description --}}
+                                            <div>
+                                                <label class="block mb-2 text-sm font-medium">Description</label>
+                                                <input type="text" name="description" id="description"
+                                                    value="{{ old('description', $event->description ?? '') }}"
+                                                    class="input"
+                                                    required>
                                             </div>
-                                        </form>
+
+                                            {{-- Places --}}
+                                            <div>
+                                                <label class="block mb-2 text-sm font-medium">Places</label>
+                                                <input type="number" name="places" id="places"
+                                                    value="{{ old('places', $event->places ?? '') }}"
+                                                    class="input">
+                                            </div>
+
+                                            {{-- Price --}}
+                                            <div>
+                                                <label class="block mb-2 text-sm font-medium">Price</label>
+                                                <input type="number" step="0.01" name="price" id="price"
+                                                    value="{{ old('price', $event->price ?? '') }}"
+                                                    class="input">
+                                            </div>
+
+                                            {{-- Date --}}
+                                            <div>
+                                                <label class="block mb-2 text-sm font-medium">Date</label>
+                                                <input type="datetime-local" name="date" id="date"
+                                                    value="{{ old('date', isset($event) ? \Carbon\Carbon::parse($event->date)->format('Y-m-d\TH:i') : '') }}"
+                                                    class="input">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="flex justify-between">
+                                            <button type="submit" class="btn-primary">
+                                                Update
+                                            </button>
+
+                                            <button type="button" id="cancelBtn" class="btn-secondary">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+
                                     </div>
                                 @else
                                     <tr
